@@ -11,6 +11,6 @@ text = "이것은 예시 문장입니다. 그리고, 여기에 또한 접속사�
 
 # ----- functions ----- # 
 api_init(api_key)
-questions_topic_checker(question1, question2)
-remove_conjunctions_korean(text)
+answer = questions_topic_checker(question1, question2) # -- true / false 
+text_wo_conjuctions = remove_conjunctions_korean(text)
 ```
