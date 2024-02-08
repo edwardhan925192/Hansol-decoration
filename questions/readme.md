@@ -13,6 +13,8 @@ text = "이것은 예시 문장입니다. 그리고, 여기에 또한 접속사�
 api_init(api_key)
 answer = questions_topic_checker(question1, question2) # -- true / false 
 text_wo_conjuctions = remove_conjunctions_korean(text)
-split_questions_into_columns()
-replace_short_strings()
+
+
+new_test = split_questions_into_columns(df, '질문') # -- split by ?
+new_test_ = replace_short_strings(new_test, 'id')
 ```
