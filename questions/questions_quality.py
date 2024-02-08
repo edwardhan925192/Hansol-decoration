@@ -9,43 +9,44 @@ def questions_topic_checker(question1, question2):
 
     try:
         response = openai.ChatCompletion.create(
-          model="gpt-3.5-turbo",
-          messages=[
-              {"role": "system", "content": "You are a helpful assistant."},
-              {"role": "user", "content": prompt}
-          ]
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ]
         )
 
         # Extracting the response text
-        answer = response['choices'][0]['message']['content'].strip()
+        answer = response.choices[0].message['content'].strip()
         print(f"Answer: {answer}")
         return answer
     except Exception as error:
         print(f"An error occurred: {error}")
         return None
 
+import openai
 
-def remove_conjunctions_korean(text):    
-
+def remove_conjunctions_korean(text):
     prompt = f"""다음 문장에서 접속 부사와 접속사를 제거해주세요. 예를 들어, '그리고', '또한' 같은 단어들을 삭제해야 합니다.
 
 문장: {text}"""
 
     try:
         response = openai.Completion.create(
-          model="gpt-3.5-turbo",
-          prompt=prompt,
-          max_tokens=1024,
-          temperature=0.3,
+            model="gpt-3.5-turbo",
+            prompt=prompt,
+            max_tokens=1024,
+            temperature=0.3
         )
-        
+
         # Extracting the response text
-        cleaned_text = response['choices'][0]['text'].strip()
+        cleaned_text = response.choices[0].text.strip()
         print(f"Cleaned Text: {cleaned_text}")
         return cleaned_text
     except Exception as error:
         print(f"An error occurred: {error}")
         return None
+
 
 def split_questions_into_columns(df, column_name):
 
