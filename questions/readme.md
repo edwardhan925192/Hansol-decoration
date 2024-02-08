@@ -1,6 +1,6 @@
 # usage 
 ```markdown
-from Hansol-decoration.questions.questionsquality import api_init, questions_topic_checker, remove_conjunctions_korean
+from Hansol_decoration.questions.questionsquality import api_init, questions_topic_checker, remove_conjunctions_korean
 api_key = 'abcde'
 
 # Example usage with Korean questions
