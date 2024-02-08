@@ -1,7 +1,9 @@
 # usage 
 ```markdown
 from Hansol_decoration.questions.questions_quality import api_init, questions_topic_checker, remove_conjunctions_korean
-api_key = 'abcde'
+
+# Set this at the start of your script or notebook, replacing 'your_api_key_here' with your actual API key
+openai.api_key = 'your_api_key_here'
 
 # Example usage with Korean questions
 question1 = "프랑스의 수도는 어디인가요?"
