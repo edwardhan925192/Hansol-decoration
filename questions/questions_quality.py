@@ -1,8 +1,5 @@
-from openai import OpenAI
+import openai
 import os
-
-def api_init(api_key):
-  openai = OpenAI(api_key=os.getenv(api_key))
 
 def questions_topic_checker(question1, question2):
     prompt = f"""다음 두 질문이 같은 주제에 관한 것인지 대답하세요. "예" 또는 "아니오"로 응답하십시오.
@@ -12,7 +9,7 @@ def questions_topic_checker(question1, question2):
 
     try:
         response = openai.ChatCompletion.create(
-          model="gpt-3.5-turbo",  # Adjust the model as necessary
+          model="gpt-3.5-turbo",
           messages=[
               {"role": "system", "content": "You are a helpful assistant."},
               {"role": "user", "content": prompt}
@@ -36,10 +33,10 @@ def remove_conjunctions_korean(text):
 
     try:
         response = openai.Completion.create(
-          model="gpt-3.5-turbo",  # Adjust the model as necessary
+          model="gpt-3.5-turbo",
           prompt=prompt,
-          max_tokens=1024,  # Adjust based on the expected length of the output
-          temperature=0.3,  # Lower temperature for more deterministic output
+          max_tokens=1024,
+          temperature=0.3,
         )
         
         # Extracting the response text
