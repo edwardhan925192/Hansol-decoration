@@ -26,3 +26,27 @@ def get_txt_file_paths(folder_path):
             txt_file_paths.append(file_path)
 
     return txt_file_paths
+
+def txts_to_docs(folder_path):
+    # Initialize an empty list to hold the cleaned documents
+    cleaned_docs = []
+
+    # List all files in the given folder
+    for filename in os.listdir(folder_path):
+        # Check if the file is a .txt file
+        if filename.endswith('.txt'):
+            # Construct the full file path
+            file_path = os.path.join(folder_path, filename)
+            
+            # Read and clean the file content
+            with open(file_path, 'r', encoding='utf-8') as file:
+                content = file.read()
+                # Replace multiple newlines with a single space
+                cleaned_content = ' '.join(content.splitlines())
+                # Replace multiple spaces with a single space
+                cleaned_content = ' '.join(cleaned_content.split())
+            
+            # Add the cleaned content to the list
+            cleaned_docs.append(cleaned_content)
+
+    return cleaned_docs
