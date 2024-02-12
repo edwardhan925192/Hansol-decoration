@@ -47,27 +47,21 @@ def remove_conjunctions_korean(text):
         print(f"An error occurred: {error}")
         return None
 
-
-def split_questions_into_columns(df, column_name):
-
+def split_questions(questions_list):
     def split_and_adjust(text):
-        parts = [part.strip() + '?' for part in text.split('?') if part.strip()]
-        if not text.endswith('?'):
-            parts[-1] = parts[-1].rstrip('?')  # Remove '?' if the text did not end with one
+        # Split by both '?' and '.', and filter out empty parts
+        parts = [part.strip() + '?' for part in text.replace('.', '?').split('?') if part.strip()]
+        # Check if the text ends with '?' or '.', adjust the last part accordingly
+        if not (text.endswith('?') or text.endswith('.')):
+            parts[-1] = parts[-1].rstrip('?')  # Remove '?' from the last part if text did not end with '?' or '.'
+        # Replace short elements with ''
+        parts = [part if len(part) >= 3 else '' for part in parts]
         return parts
 
-    split_texts = df[column_name].apply(split_and_adjust)
-    max_questions = split_texts.apply(len).max()
-    question_columns = [f'Question {i+1}' for i in range(max_questions)]
-    new_df = pd.DataFrame(index=df.index, columns=['id'] + question_columns)
-    new_df['id'] = df['id']  # Copy the ID column
+    # Process each question in the list
+    processed_questions = [split_and_adjust(question[0]) for question in questions_list]
 
-    for i, questions in enumerate(split_texts):
-        new_df.loc[i, ['id'] + question_columns[:len(questions)]] = [df.loc[i, 'id']] + questions
-
-    new_df = new_df.fillna(0)
-
-    return new_df
+    return processed_questions
 
 
 def replace_short_strings(df, exclude_column):
