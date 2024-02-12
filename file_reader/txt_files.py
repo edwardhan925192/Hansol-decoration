@@ -2,6 +2,19 @@ import os
 from langchain_community.document_loaders.text import TextLoader
 from tqdm import tqdm
 
+def clean_text_file(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        # Read the entire content of the file
+        content = file.read()
+
+    # Replace multiple newlines with a single space
+    cleaned_content = ' '.join(content.splitlines())
+
+    # Replace multiple spaces with a single space
+    cleaned_content = ' '.join(cleaned_content.split())
+
+    return cleaned_content
+
 def clean_and_save_txt_files(folder_path):
     # Retrieve a list of all .txt files in the folder
     txt_files = [f for f in os.listdir(folder_path) if f.endswith('.txt')]
