@@ -48,24 +48,15 @@ def remove_conjunctions_korean(text):
         return None
 
 def split_questions(questions_list):
-    def split_and_adjust(text):
-        # Split by both '?' and '.', and filter out empty parts
+    def split_and_adjust(text):        
         parts = [part.strip() + '?' for part in text.replace('.', '?').split('?') if part.strip()]
-        # Check if the text ends with '?' or '.', adjust the last part accordingly
+        
         if not (text.endswith('?') or text.endswith('.')):
-            parts[-1] = parts[-1].rstrip('?')  # Remove '?' from the last part if text did not end with '?' or '.'
-        # Replace short elements with ''
+            parts[-1] = parts[-1].rstrip('?')  
+                    
         parts = [part if len(part) >= 3 else '' for part in parts]
         return parts
+    
+    processed_questions = [split_and_adjust(question) for question in questions_list]
 
-    # Process each question in the list
-    processed_questions = [split_and_adjust(question[0]) for question in questions_list]
-
-    return processed_questions
-
-
-def replace_short_strings(df, exclude_column):
-    for column in df.columns:
-        if column != exclude_column:
-            df[column] = df[column].apply(lambda x: 0 if isinstance(x, str) and len(x) < 3 else x)
-    return df
+    return processed_questions   
