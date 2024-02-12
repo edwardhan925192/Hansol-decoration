@@ -1,3 +1,5 @@
+import os
+
 def clean_text_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         # Read the entire content of the file
@@ -10,8 +12,6 @@ def clean_text_file(file_path):
     cleaned_content = ' '.join(cleaned_content.split())
 
     return cleaned_content
-
-import os
 
 def get_txt_file_paths(folder_path):
     txt_file_paths = []
