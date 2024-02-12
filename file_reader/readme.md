@@ -1,6 +1,6 @@
 # txt_files
 ```markdown
-# -- Role 1
+# -- clean_text_file
 for each txt files, it closes sentence gaps, space gaps
 
 # -- Role 2
