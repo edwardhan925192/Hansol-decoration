@@ -34,12 +34,7 @@ def txts_to_docs(folder_path):
         file_path = os.path.join(folder_path, filename)
         
         # Read and clean the file content
-        with open(file_path, 'r', encoding='utf-8') as file:
-            content = file.read()
-            # Replace multiple newlines with a single space
-            cleaned_content = ' '.join(content.splitlines())
-            # Replace multiple spaces with a single space
-            cleaned_content = ' '.join(cleaned_content.split())
+        cleaned_content = clean_text_file(file_path)
         
         # Add the cleaned content to the list
         cleaned_docs.append(cleaned_content)
