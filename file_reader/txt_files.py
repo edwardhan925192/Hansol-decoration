@@ -34,22 +34,14 @@ def clean_and_save_txt_files(folder_path):
         with open(cleaned_file_path, 'w', encoding='utf-8') as file:
             file.write(cleaned_content)
 
-def txts_to_docs(folder_path):
-    # Initialize an empty list to hold the cleaned documents
-    cleaned_docs = []
-
-    # Retrieve a list of all .txt files in the folder
-    txt_files = [f for f in os.listdir(folder_path) if f.endswith('.txt')]
+def txts_to_docs(folder_path):    
+    docs = []
     
-    # List all .txt files in the given folder and wrap it with tqdm for a progress bar
-    for filename in tqdm(txt_files, desc='Processing TXTs'):
-        # Construct the full file path
-        file_path = os.path.join(folder_path, filename)
-        
-        # Read and clean the file content
-        cleaned_content = clean_text_file(file_path)
-        
-        # Add the cleaned content to the list
-        cleaned_docs.append(cleaned_content)
+    pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.txt')]    
+    
+    for filename in tqdm(pdf_files, desc='Processing TXTs'):        
+        file_path = os.path.join(folder_path, filename)        
+        loader = TextLoader(file_path)        
+        docs.extend(loader.load_and_split())
 
-    return cleaned_docs
+    return docs
