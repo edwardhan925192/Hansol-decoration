@@ -5,6 +5,9 @@ from Hansol_decoration.file_reader.pdf_files import pdfs_to_docs
 
 # txt_files
 ```markdown
+# -- clean_and_save_txt_files
+1. cleaning up
+
 # -- txts_to_docs
 1. It reads all the txt files in folder and return lists 
 2. for each txt files, it closes sentence gaps, space gaps
