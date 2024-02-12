@@ -1,7 +1,7 @@
 import os
 from langchain.document_loaders import PyPDFLoader
 
-def load_pdf_documents_from_folder(folder_path):
+def pdfs_to_docs(folder_path):
     # Initialize an empty list to hold all documents
     docs = []
 
