@@ -1,21 +1,16 @@
 ```markdown
-from Hansol_decoration.file_reader.txt_files import txts_to_docs
+from Hansol_decoration.file_reader.txt_files import txts_to_docs, txt_files_to_dict
 from Hansol_decoration.file_reader.pdf_files import pdfs_to_docs
 ```
 
 # txt_files
 ```markdown
-# -- clean_and_save_txt_files
-1. cleaning up
-
-# -- txts_to_docs
-1. It reads all the txt files in folder and return lists 
-2. for each txt files, it closes sentence gaps, space gaps
-3. make it to list of documents
+clean_and_save_txt_files(text) # -- return text
+txts_to_docs(folder_path) # -- return list of docs
+txt_files_to_dict(folder_path) # -- return dict
 ```
 # pdf files 
 ```markdown
-# -- pdfs_to_docs
-1. It reads all the pdf files in folder and return lists 
-2. make it to list of documents
+pdfs_to_docs(folder_path) # -- return list of docs
+
 ```
