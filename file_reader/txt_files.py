@@ -45,3 +45,22 @@ def txts_to_docs(folder_path):
         docs.extend(loader.load_and_split())
 
     return docs
+
+def txt_files_to_dict(folder_path):
+    files_dict = {}
+    
+    # Iterate through all files in the folder
+    for filename in os.listdir(folder_path):
+        if filename.endswith(".txt"):
+            # Construct full file path
+            file_path = os.path.join(folder_path, filename)
+            
+            # Read the contents of the file
+            with open(file_path, 'r', encoding='utf-8') as file:
+                content = file.read()
+                
+            # Use the filename without '.txt' as the key
+            title = os.path.splitext(filename)[0]
+            files_dict[title] = content
+    
+    return files_dict
