@@ -31,44 +31,31 @@ def lookup_keywords_with_spaces(question, dictionary):
 
 # -- single question 
 def qa_from_stringdb(string_db, question, index_dict, matched_keys, model, tokenizer):
-
-    # -- index are stored
     indexes = []
     for keyword in matched_keys:
-        if keyword in documentation_dict:
-          for key_indexes in documentation_dict[keyword]:
-            indexes.append(key_indexes)     
+        # Check if keyword exists in index_dict to avoid KeyError
+        if keyword in index_dict:
+            indexes.extend(index_dict[keyword])
 
-    # -- string documents are stored 
-    documents_list = []
-
-    # Collect documents based on indexes
-    for index in indexes:
-        documents_list.append(string_db[index]) 
-    
-    # Format the retrieved documents to create a context string
+    documents_list = [string_db[index] for index in indexes if index in string_db]  # Check for index existence
     formatted_docs = "\n\n".join(documents_list)
-
-    answer = generate_text_directly(model, tokenizer, question, context="", max_length=512)                
+    # Pass formatted_docs as context
+    answer = generate_text_directly(model, tokenizer, question, context=formatted_docs, max_length=512)                
     return answer
 
 
 # -- processing the whole question
-def process_questions(string_db, question_lists, documentation_dict,model, tokenizer):
+def process_questions(string_db, question_lists, documentation_dict, model, tokenizer):
     result = []
-
-    # -- outer list
     for question_list in tqdm(question_lists, total=len(question_lists)):
         all_answers = []
-
-        # -- inner lists
         for question in question_list:
-            matched_keys = lookup_keywords_with_spaces(questions, updated_dict)
+            # Corrected variable name from questions to question
+            matched_keys = lookup_keywords_with_spaces(question, documentation_dict)  # Corrected dict name
 
-            # if there are matched keys
-            if len(matched_keys) > 0:                             
-              answers = qa_from_stringdb(string_db, question, index_dict, matched_keys, model, tokenizer)
-              all_answers.append(answers)            
+            if matched_keys:
+                answers = qa_from_stringdb(string_db, question, documentation_dict, matched_keys, model, tokenizer)
+                all_answers.append(answers)
 
         concatenated_answers = " ".join(all_answers)
         result.append(concatenated_answers)
