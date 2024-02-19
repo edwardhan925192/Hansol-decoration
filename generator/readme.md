@@ -1,5 +1,5 @@
 ```markdown
-from Hansol_decoration.generator. import process_questions
+from Hansol_decoration.generator.generator import process_questions
 ```
 
 
