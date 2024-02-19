@@ -30,7 +30,7 @@ def lookup_keywords_with_spaces(question, dictionary):
 
 
 # -- single question 
-def qa_from_stringdb(string_db, question, index_dict, matched_keys):
+def qa_from_stringdb(string_db, question, index_dict, matched_keys, model, tokenizer):
 
     # -- index are stored
     indexes = []
@@ -49,12 +49,12 @@ def qa_from_stringdb(string_db, question, index_dict, matched_keys):
     # Format the retrieved documents to create a context string
     formatted_docs = "\n\n".join(documents_list)
 
-    answer = generate_text_directly(question, context=formatted_docs)                
+    answer = generate_text_directly(model, tokenizer, question, context="", max_length=512)                
     return answer
 
 
 # -- processing the whole question
-def process_questions(string_db, question_lists, documentation_dict):
+def process_questions(string_db, question_lists, documentation_dict,model, tokenizer):
     result = []
 
     # -- outer list
@@ -67,7 +67,7 @@ def process_questions(string_db, question_lists, documentation_dict):
 
             # if there are matched keys
             if len(matched_keys) > 0:                             
-              answers = qa_from_stringdb(string_db, question, documentation_dict, custom_rag_prompt, hf, matched_keys)
+              answers = qa_from_stringdb(string_db, question, index_dict, matched_keys, model, tokenizer)
               all_answers.append(answers)            
 
         concatenated_answers = " ".join(all_answers)
