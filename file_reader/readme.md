@@ -1,5 +1,5 @@
 ```markdown
-from Hansol_decoration.file_reader.txt_files import txts_to_docs, txt_files_to_dict
+from Hansol_decoration.file_reader.type_transformation import txts_to_docs, txt_files_to_dict
 from Hansol_decoration.file_reader.pdf_files import pdfs_to_docs
 ```
 
