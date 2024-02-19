@@ -7,6 +7,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from langchain_community.llms.huggingface_pipeline import HuggingFacePipeline
 from transformers import LlamaForCausalLM, AutoTokenizer, pipeline
+from tqdm import tqdm 
 
 
 def generate_text_directly(model, tokenizer, question, context="", max_length=512):
