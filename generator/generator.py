@@ -30,7 +30,7 @@ def lookup_keywords_with_spaces(question, dictionary):
 
 
 # -- single question 
-def qa_from_stringdb(string_db, question, documentation_dict, custom_rag_prompt, hf, matched_keys):
+def qa_from_stringdb(string_db, question, index_dict, matched_keys):
 
     # -- index are stored
     indexes = []
@@ -54,7 +54,7 @@ def qa_from_stringdb(string_db, question, documentation_dict, custom_rag_prompt,
 
 
 # -- processing the whole question
-def process_questions(string_db, question_lists, documentation_dict,custom_rag_prompt,hf):
+def process_questions(string_db, question_lists, documentation_dict):
     result = []
 
     # -- outer list
