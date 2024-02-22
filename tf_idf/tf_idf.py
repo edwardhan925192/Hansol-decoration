@@ -55,7 +55,7 @@ def remove_all_stop_words(texts, stop_words):
 
 
 def texts_to_tfidf_dense_matrix(texts: List[str]) -> np.ndarray:
-    processed_texts = remove_all_stop_words(contents, korean_stop_words_lentwo)
+    processed_texts = remove_all_stop_words(texts, korean_stop_words_lentwo)
     p_processed_texts = remove_attached_stop_words_adjusted(processed_texts, korean_stop_words)
     vectorizer = CountVectorizer(min_df=1)
     tfidf_vectorizer = TfidfVectorizer()
